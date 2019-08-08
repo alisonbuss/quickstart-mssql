@@ -4,7 +4,7 @@
 -- https://www.json-generator.com/
 -- {
 --   accounts: [
---     '{{repeat(1, 3100)}}',
+--     '{{repeat(1, 3666)}}',
 --     {
 --       id: '{{index()}}',
 --       name: '{{firstName()}} {{surname()}}',
