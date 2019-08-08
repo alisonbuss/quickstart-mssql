@@ -1,0 +1,22 @@
+
+version: '3.7'
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+
+services:
+  database:
+    image: image/mssql
+    container_name: container-db
+    build:
+      context: ./src/database
+      dockerfile: Dockerfile
+    volumes:
+      - ./builds/database/data:/var/opt/mssql/data
+    networks:
+      - internal
+    ports:
+      - 1433:1433
