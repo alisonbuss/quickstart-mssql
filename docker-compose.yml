@@ -2,21 +2,33 @@
 version: '3.7'
 
 networks:
-  web:
-    external: true
   internal:
     external: false
 
+volumes:
+  vol_data_node01:
+    driver: local
+    external: false
+    name: volume_node01
+
 services:
-  database:
+  db-mssql-node01:
     image: image/mssql
-    container_name: container-db
+    container_name: container-mssql-node01
+    environment:
+      DB_MSSQL_APPLY_DATABASE: 'Y'
+      DB_MSSQL_TZ: 'America/Sao_Paulo'
+    hostname:
+      mssql-node01
+    domainname:
+      local.mssql.com
     build:
       context: ./src/database
       dockerfile: Dockerfile
+    restart: always
     volumes:
-      - ./builds/database/data:/var/opt/mssql/data
-    networks:
-      - internal
+      - ./builds/database/node1:/var/opt/mssql/data/node1
     ports:
       - 1433:1433
+    networks:
+      - internal

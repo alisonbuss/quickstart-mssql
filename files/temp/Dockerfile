@@ -23,14 +23,11 @@ ENV DEPLOYMENT_DIR=/home/app/database
 ENV DB_MSSQL_USER=sa
 ENV DB_MSSQL_PASSWORD=!demo54321
 ENV DB_MSSQL_DATABASE=master
-ENV DB_MSSQL_TZ=America/New_York
-ENV DB_MSSQL_APPLY_DATABASE=N
 
 # Sets default environment variables of the mssql image.
 ENV MSSQL_PID=Developer 
 ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=$DB_MSSQL_PASSWORD
-ENV TZ=$DB_MSSQL_TZ
 
 # Sets the variable to inform Docker that the container
 # listens on the specified network port.

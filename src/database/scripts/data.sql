@@ -20,7 +20,7 @@
 
 
 INSERT INTO domain.Accounts (
-    name, email, emailRecovery, password, active, registered, logged
+    [name], [email], [emailRecovery], [password], [active], [registered], [logged]
 )
 VALUES
     ("Nita Joseph","nitajoseph@urbanshee.com","hale.terrie@keengen.com","5d4b86d483cc8afd96fcc5c2",1,"1982-06-01 10:10:45",0),

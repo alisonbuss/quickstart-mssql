@@ -1,0 +1,79 @@
+
+version: '3.7'
+
+networks:
+  internal:
+    external: false
+
+volumes:
+  vol-data-mssql01:
+  vol-data-mssql02:
+  vol-data-mssql03:
+
+services:
+  db-mssql-node01:
+    image: image/mssql
+    container_name: container-mssql-node01
+    environment:
+      DB_MSSQL_TZ: 'America/Sao_Paulo'
+    hostname:
+      mssql-node01
+    domainname:
+      local.mssql.com
+    build:
+      context: ./src/database
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - vol-data-mssql01:/var/opt/mssql/data/node1
+    ports:
+      - "14331:1433"
+      - "15021:5022"
+    networks:
+      - internal
+    command: /opt/mssql/bin/mssql-conf set hadr.hadrenabled 1
+
+  db-mssql-node02:
+    image: image/mssql
+    container_name: container-mssql-node02
+    environment:
+      DB_MSSQL_TZ: 'America/Sao_Paulo'
+    hostname:
+      mssql-node02
+    domainname:
+      local.mssql.com
+    build:
+      context: ./src/database
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - vol-data-mssql02:/var/opt/mssql/data/node2
+    ports:
+      - "14332:1433"
+      - "15022:5022"
+    networks:
+      - internal
+    command: /opt/mssql/bin/mssql-conf set hadr.hadrenabled 1
+
+  db-mssql-node03:
+    image: image/mssql
+    container_name: container-mssql-node03
+    environment:
+      DB_MSSQL_APPLY_DATABASE: 'Y'
+      DB_MSSQL_TZ: 'America/Sao_Paulo'
+    hostname:
+      mssql-node03
+    domainname:
+      local.mssql.com
+    build:
+      context: ./src/database
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - vol-data-mssql03:/var/opt/mssql/data/node3
+    ports:
+      - "14333:1433"
+      - "15023:5022"
+    networks:
+      - internal
+    command: /opt/mssql/bin/mssql-conf set hadr.hadrenabled 1

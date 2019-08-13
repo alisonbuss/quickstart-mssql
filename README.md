@@ -10,6 +10,10 @@
 
 docker exec -it container-db "bash"
 
+
+docker exec -it container-mssql-node01 "bash"
+
+
 ...
 
 Dockerfile.single
@@ -18,6 +22,24 @@ Dockerfile.cluster
 
 ### References:
 
+
+https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-availability-group-overview?view=sql-server-2017
+https://itnext.io/docker-101-fundamentals-the-dockerfile-b33b59d0f14b
+
+https://www.sqlshack.com/configure-sql-server-2017-linux-mssql-conf-available-tools/
+
+https://github.com/enriquecatala/sqlserver-docker-alwayson
+https://medium.com/@2hamed/replicating-postgres-inside-docker-the-how-to-3244dc2305be
+https://github.com/syndbg/postgres-docker-cluster/blob/master/docker-compose.yml
+
+https://www.virtual-dba.com/what-is-alwayson/
+http://marti.com.br/ms-sql-server-no-docker/
+
+http://marti.com.br/ms-sql-server-no-docker/
+
+
+https://medium.com/ekode/azure-data-studio-e-sql-server-profiler-monitorando-seu-banco-de-dados-199bcb3bd1c1
+https://medium.com/@wendreof/como-gerenciar-sql-server-no-linux-52cd49a7978a
 
 https://www.mundodocker.com.br/o-que-e-dockerfile/
 http://stack.desenvolvedor.expert/appendix/docker/rede.html
@@ -65,7 +87,8 @@ https://www.mundodocker.com.br/o-que-e-dockerfile/
 https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/
 
 
-
+https://menakamadushanka.wordpress.com/2017/12/15/how-to-deploy-a-mysql-cluster-from-scratch-with-docker/
+https://medium.com/@ahmedamedy/mysql-clustering-with-docker-611dc28b8db7
 
 
 ### License

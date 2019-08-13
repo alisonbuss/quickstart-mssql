@@ -5,12 +5,18 @@ GO
 USE master;
 GO
 
+-- -----------------------------------------------------
+-- IF EXISTS, DROP: quickstart
+-- -----------------------------------------------------
 IF EXISTS (SELECT name FROM sys.databases WHERE name = N'quickstart')
 BEGIN
     DROP DATABASE quickstart;
 END
 GO
 
+-- -----------------------------------------------------
+-- DATABASE: quickstart
+-- -----------------------------------------------------
 CREATE DATABASE quickstart ON (
     NAME = quickstart_data,
     FILENAME = '/var/opt/mssql/data/quickstart_data.mdf',
@@ -29,11 +35,14 @@ GO
 USE quickstart;
 GO
 
+-- -----------------------------------------------------
+-- SCHEMA: domain
+-- -----------------------------------------------------
 CREATE SCHEMA domain;
 GO
 
 -- -----------------------------------------------------
--- Table domain.Accounts
+-- TABLE: Accounts
 -- -----------------------------------------------------
 CREATE TABLE domain.Accounts (
     [id] int IDENTITY(1,1) NOT NULL PRIMARY KEY,
