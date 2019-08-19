@@ -35,6 +35,7 @@ ENV TZ=$DB_MSSQL_TZ
 # Sets the variable to inform Docker that the container
 # listens on the specified network port.
 EXPOSE 1433
+EXPOSE 5022
 
 # Sets the default working directory of the image for any
 # RUN, CMD, ENTRYPOINT, COPY, and ADD statements that come
