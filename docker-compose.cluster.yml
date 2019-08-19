@@ -6,16 +6,31 @@ networks:
     external: false
 
 volumes:
-  vol-data-mssql01:
-  vol-data-mssql02:
-  vol-data-mssql03:
+  vol_data_mssql01:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/volumes/data/mssql01
+      o: bind
+  vol_data_mssql02:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/volumes/data/mssql02
+      o: bind
+  vol_data_mssql03:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/volumes/data/mssql03
+      o: bind
 
 services:
   db-mssql-node01:
     image: image/mssql
     container_name: container-mssql-node01
     environment:
-      DB_MSSQL_TZ: 'America/Sao_Paulo'
+      DB_MSSQL_TZ: 'America/Los_Angeles'
     hostname:
       mssql-node01
     domainname:
@@ -25,7 +40,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - vol-data-mssql01:/var/opt/mssql/data/node1
+      - vol_data_mssql01:/var/opt/mssql/data
     ports:
       - "14331:1433"
       - "15021:5022"
@@ -37,7 +52,7 @@ services:
     image: image/mssql
     container_name: container-mssql-node02
     environment:
-      DB_MSSQL_TZ: 'America/Sao_Paulo'
+      DB_MSSQL_TZ: 'America/Los_Angeles'
     hostname:
       mssql-node02
     domainname:
@@ -47,7 +62,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - vol-data-mssql02:/var/opt/mssql/data/node2
+      - vol_data_mssql02:/var/opt/mssql/data
     ports:
       - "14332:1433"
       - "15022:5022"
@@ -60,7 +75,7 @@ services:
     container_name: container-mssql-node03
     environment:
       DB_MSSQL_APPLY_DATABASE: 'Y'
-      DB_MSSQL_TZ: 'America/Sao_Paulo'
+      DB_MSSQL_TZ: 'America/Los_Angeles'
     hostname:
       mssql-node03
     domainname:
@@ -70,7 +85,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - vol-data-mssql03:/var/opt/mssql/data/node3
+      - vol_data_mssql03:/var/opt/mssql/data
     ports:
       - "14333:1433"
       - "15023:5022"

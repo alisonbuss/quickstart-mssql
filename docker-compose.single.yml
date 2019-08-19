@@ -6,10 +6,12 @@ networks:
     external: false
 
 volumes:
-  vol_data_node01:
+  vol_data_mssql01:
     driver: local
-    external: false
-    name: volume_node01
+    driver_opts:
+      type: none
+      device: $PWD/volumes/data/mssql01
+      o: bind
 
 services:
   db-mssql-node01:
@@ -27,8 +29,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./builds/database/node1:/var/opt/mssql/data/node1
+      - vol_data_mssql01:/var/opt/mssql/data
     ports:
-      - 1433:1433
+      - "1433:1433"
     networks:
       - internal

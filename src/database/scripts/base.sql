@@ -29,7 +29,7 @@ CREATE DATABASE quickstart ON (
     SIZE = 8MB,
     MAXSIZE = 128MB,
     FILEGROWTH = 64MB
-) COLLATE Latin1_General_CI_AS;
+) COLLATE LATIN1_GENERAL_100_CI_AS_SC; -- OR Latin1_General_CI_AS
 GO
 
 USE quickstart;
