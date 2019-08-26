@@ -8,22 +8,21 @@
 #         https://github.com/microsoft/sql-server-samples
 #         https://www.handsonarchitect.com/2018/01/build-custom-sql-server-2017-linux.html
 # @example:
-#   
-#   
-#   
+#     
 #-------------------------------------------------------------#
 
 # Official images for Microsoft SQL Server on Linux for Docker Engine.
 FROM mcr.microsoft.com/mssql/server:2017-latest AS build
 
 # Sets the default working directory of the image.
-ENV DEPLOYMENT_DIR=/home/app/database
+ENV DEPLOYMENT_DIR=/home/app/mssql
 
 # Sets the database connection variables.
 ENV DB_MSSQL_USER=sa
 ENV DB_MSSQL_PASSWORD=!demo54321
 ENV DB_MSSQL_DATABASE=master
 ENV DB_MSSQL_TZ=America/New_York
+ENV DB_MSSQL_APPLY_CLUSTER=N
 ENV DB_MSSQL_APPLY_DATABASE=N
 
 # Sets default environment variables of the mssql image.
@@ -48,10 +47,10 @@ COPY ./setup   $DEPLOYMENT_DIR/setup
 COPY ./scripts $DEPLOYMENT_DIR/scripts
 
 # Run the command to grant permissions for scripts to be executable.
-RUN chmod +x ./setup/entrypoint.sh && chmod +x ./setup/setup-database.sh
+RUN chmod +x ./setup/*.sh
 
 # Run a command to allows you to configure a container that will run as an executable.
-ENTRYPOINT bash ./setup/entrypoint.sh | tee -a ./deploy-database.log
+ENTRYPOINT bash ./setup/entrypoint.sh | tee -a ./deployment.log
 
 # The HEALTHCHECK instruction tells Docker how to test a container to check that it is still working.
 HEALTHCHECK --interval=11s --timeout=33s --retries=3 \

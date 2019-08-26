@@ -2,93 +2,113 @@
 version: '3.7'
 
 networks:
-  internal:
-    external: false
+  backend:
+    driver: bridge
 
 volumes:
-  vol_data_mssql01:
+  vol_certificates:
     driver: local
     driver_opts:
       type: none
-      device: $PWD/volumes/data/mssql01
+      # It is necessary that this directory already exists!
+      device: $PWD/volumes/certificates
       o: bind
-  vol_data_mssql02:
+  vol_mssql01:
     driver: local
     driver_opts:
       type: none
-      device: $PWD/volumes/data/mssql02
+      # It is necessary that this directory already exists!
+      device: $PWD/volumes/mssql01/data
       o: bind
-  vol_data_mssql03:
+  vol_mssql02:
     driver: local
     driver_opts:
       type: none
-      device: $PWD/volumes/data/mssql03
+      # It is necessary that this directory already exists!
+      device: $PWD/volumes/mssql02/data
+      o: bind
+  vol_mssql03:
+    driver: local
+    driver_opts:
+      type: none
+      # It is necessary that this directory already exists!
+      device: $PWD/volumes/mssql03/data
       o: bind
 
 services:
-  db-mssql-node01:
+  db_mssql_node01:
     image: image/mssql
-    container_name: container-mssql-node01
+    container_name: ctn-mssql-node01
+    hostname: mssql-node01
+    domainname: local.domain.com
     environment:
+      DB_MSSQL_APPLY_CLUSTER: 'Y'
       DB_MSSQL_TZ: 'America/Los_Angeles'
-    hostname:
-      mssql-node01
-    domainname:
-      local.mssql.com
     build:
       context: ./src/database
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - vol_data_mssql01:/var/opt/mssql/data
+      - vol_certificates:/home/app/mssql/certificates
+      - vol_mssql01:/var/opt/mssql/data
     ports:
       - "14331:1433"
       - "15021:5022"
     networks:
-      - internal
-    command: /opt/mssql/bin/mssql-conf set hadr.hadrenabled 1
+      backend:
+        aliases:
+         - mssql-node01
+         - mssql-node01.local.domain.com
 
-  db-mssql-node02:
+  db_mssql_node02:
     image: image/mssql
-    container_name: container-mssql-node02
+    container_name: ctn-mssql-node02
+    hostname: mssql-node02
+    domainname: local.domain.com
     environment:
+      DB_MSSQL_APPLY_CLUSTER: 'Y'
       DB_MSSQL_TZ: 'America/Los_Angeles'
-    hostname:
-      mssql-node02
-    domainname:
-      local.mssql.com
+    depends_on:
+      - db_mssql_node01
     build:
       context: ./src/database
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - vol_data_mssql02:/var/opt/mssql/data
+      - vol_certificates:/home/app/mssql/certificates
+      - vol_mssql02:/var/opt/mssql/data
     ports:
       - "14332:1433"
       - "15022:5022"
     networks:
-      - internal
-    command: /opt/mssql/bin/mssql-conf set hadr.hadrenabled 1
+      backend:
+        aliases:
+         - mssql-node02
+         - mssql-node02.local.domain.com
 
-  db-mssql-node03:
+  db_mssql_node03:
     image: image/mssql
-    container_name: container-mssql-node03
+    container_name: ctn-mssql-node03
+    hostname: mssql-node03
+    domainname: local.domain.com
     environment:
+      DB_MSSQL_APPLY_CLUSTER: 'Y'
       DB_MSSQL_APPLY_DATABASE: 'Y'
       DB_MSSQL_TZ: 'America/Los_Angeles'
-    hostname:
-      mssql-node03
-    domainname:
-      local.mssql.com
+    depends_on:
+      - db_mssql_node01
     build:
       context: ./src/database
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - vol_data_mssql03:/var/opt/mssql/data
+      - vol_certificates:/home/app/mssql/certificates
+      - vol_mssql03:/var/opt/mssql/data
     ports:
       - "14333:1433"
       - "15023:5022"
     networks:
-      - internal
-    command: /opt/mssql/bin/mssql-conf set hadr.hadrenabled 1
+      backend:
+        aliases:
+         - mssql-node03
+         - mssql-node03.local.domain.com

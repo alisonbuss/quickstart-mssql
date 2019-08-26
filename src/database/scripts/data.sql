@@ -1032,7 +1032,7 @@ GO
 
 
 INSERT INTO domain.Accounts (
-    name, email, emailRecovery, password, active, registered, logged
+    [name], [email], [emailRecovery], [password], [active], [registered], [logged]
 )
 VALUES
     ("Ferrell Joseph","ferrelljoseph@viocular.com","hale.hope@portaline.com","5d4b86d442e02db44d2cef4c",0,"2015-01-11 05:48:34",0),
@@ -2044,7 +2044,7 @@ GO
 
 
 INSERT INTO domain.Accounts (
-    name, email, emailRecovery, password, active, registered, logged
+    [name], [email], [emailRecovery], [password], [active], [registered], [logged]
 )
 VALUES
     ("Burks Joseph","burksjoseph@halap.com","hale.wise@namebox.com","5d4b86d4ae516eb359a95bd5",1,"2003-08-02 05:58:49",1),
@@ -3055,7 +3055,7 @@ GO
 
 
 INSERT INTO domain.Accounts (
-    name, email, emailRecovery, password, active, registered, logged
+    [name], [email], [emailRecovery], [password], [active], [registered], [logged]
 )
 VALUES
     ("Dawn Joseph","dawnjoseph@supremia.com","hale.anne@zillanet.com","5d4b86d4e12ea17f78b0d5dc",1,"1994-12-18 11:14:20",1),

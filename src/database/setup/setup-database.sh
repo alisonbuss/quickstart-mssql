@@ -1,7 +1,10 @@
 #!/bin/bash
 set -euxo pipefail;
 
-echo "Please wait while SQL Server 2017 warms up...";
+echo "Starting the SQL Server Service...";
+/opt/mssql/bin/sqlservr &
+
+echo "Please wait while SQL Server warms up...";
 sleep 13s;
 
 echo "Initializing database after 13 seconds of wait...";

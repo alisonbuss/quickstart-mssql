@@ -14,6 +14,18 @@ docker exec -it container-db "bash"
 docker exec -it container-mssql-node01 "bash"
 
 
+volume-remove-mssql01:
+	@docker volume rm -f quickstart-mssql_vol_data_mssql01;
+
+volume-remove-mssql02:
+	@docker volume rm -f quickstart-mssql_vol_data_mssql02;
+
+volume-remove-mssql03:
+	@docker volume rm -f quickstart-mssql_vol_data_mssql03;
+
+volume-remove-mssql-single:
+	@docker volume rm -f quickstart-mssql_vol_data_mssql_single;
+
 ...
 
 Dockerfile.single
@@ -22,6 +34,24 @@ Dockerfile.cluster
 
 ### References:
 
+https://docs.microsoft.com/pt-br/sql/linux/sql-server-linux-availability-group-configure-ha?view=sql-server-2017
+
+https://medium.com/@yani/two-way-link-with-docker-compose-8e774887be41
+
+A ARTE DE ESCOLHER NOMES PARA SERVIDORES
+https://blog.welrbraga.eti.br/?p=1163
+
+Procedimentos de Padronização de Nomes
+https://fabiozibiani.wordpress.com/2011/11/15/procedimentos-de-padronizacao-de-nomes/
+
+
+https://medium.com/@yani/two-way-link-with-docker-compose-8e774887be41
+
+https://pt.stackoverflow.com/questions/243881/docker-compose-link
+
+http://blog.code4hire.com/2018/06/define-named-volume-with-host-mount-in-the-docker-compose-file/
+
+https://sandro-keil.de/blog/docker-compose-with-named-volumes-and-multiple-networks/
 
 https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-availability-group-overview?view=sql-server-2017
 https://itnext.io/docker-101-fundamentals-the-dockerfile-b33b59d0f14b
