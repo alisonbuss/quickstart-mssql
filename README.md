@@ -1,5 +1,5 @@
 
-# Quickstart of a SQL Server cluster with Docker Compose.
+# Quickstart of a Sample SQL Server with Docker Compose.
 
 #### Translation for: **[Portuguese - Brazil](https://github.com/alisonbuss/quickstart-mssql/blob/master/README_LANG_PT-BR.md)**.
 
